@@ -26,7 +26,7 @@ Drag Ultragate-Qt to your applications folder, and then run Ultragate-Qt.
 
 ### Need Help?
 
-* See the documentation at the [Ultragate Wiki](https://github.com/ultranatum/ultragateV1/wiki)
+* See the documentation at the [Ultragate Wiki](https://github.com/ultranatum/ultragateV2/wiki)
 for help and more information.
 * Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [Ultragate Forum](http://forum.ultragate.net/).
 * Join our Discord server [Discord Server](https://discord.ultragate.net)

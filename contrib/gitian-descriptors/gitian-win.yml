@@ -24,8 +24,8 @@ packages:
 - "python3"
 - "rename"
 remotes:
-- "url": "https://github.com/ultranatum/ultragateV1.git"
-  "dir": "ultragateV1"
+- "url": "https://github.com/ultranatum/ultragateV2.git"
+  "dir": "ultragateV2"
 files: []
 script: |
   set -e -o pipefail
@@ -106,7 +106,7 @@ script: |
   create_per-host_linker_wrapper "2000-01-01 12:00:00"
   export PATH=${WRAP_DIR}:${PATH}
 
-  cd ultragateV1
+  cd ultragateV2
   BASEPREFIX=`pwd`/depends
   # Build dependencies for each host
   for i in $HOSTS; do
