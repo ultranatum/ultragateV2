@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=Ultragate Core
+Comment=Ultragate Core QT main network
+GenericName=Ultragate Digital Currency QT client main network
+Exec=ultragate-core.qt %u
+Terminal=false
+Type=Application
+Icon=${SNAP}/share/pixmaps/ultragate.png
+MimeType=x-scheme-handler/ultragate;
+Categories=X-Office;X-Finance;
+Keywords=internet;ultragate;zulg;ulg;core;wallet;qt;main;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0
