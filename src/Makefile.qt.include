@@ -1,0 +1,692 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/ultragate-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# ultragate qt core #
+include Makefile.qt_locale.include
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/ultragate/forms/loadingdialog.ui \
+  qt/ultragate/forms/snackbar.ui \
+  qt/ultragate/forms/navmenuwidget.ui \
+  qt/ultragate/forms/lockunlock.ui \
+  qt/ultragate/forms/expandablebutton.ui \
+  qt/ultragate/forms/receivedialog.ui \
+  qt/ultragate/forms/topbar.ui \
+  qt/ultragate/forms/txrow.ui \
+  qt/ultragate/forms/dashboardwidget.ui \
+  qt/ultragate/forms/addresslabelrow.ui \
+  qt/ultragate/forms/contactdropdownrow.ui \
+  qt/ultragate/forms/mninfodialog.ui \
+  qt/ultragate/forms/optionbutton.ui \
+  qt/ultragate/forms/masternodewizarddialog.ui \
+  qt/ultragate/forms/mnrow.ui \
+  qt/ultragate/forms/masternodeswidget.ui \
+  qt/ultragate/forms/myaddressrow.ui \
+  qt/ultragate/forms/sendchangeaddressdialog.ui \
+  qt/ultragate/forms/sendconfirmdialog.ui \
+  qt/ultragate/forms/sendcustomfeedialog.ui \
+  qt/ultragate/forms/sendchangeaddressdialog.ui \
+  qt/ultragate/forms/sendmultirow.ui \
+  qt/ultragate/forms/send.ui \
+  qt/ultragate/forms/addnewaddressdialog.ui \
+  qt/ultragate/forms/addnewcontactdialog.ui \
+  qt/ultragate/forms/requestdialog.ui \
+  qt/ultragate/forms/receivewidget.ui \
+  qt/ultragate/forms/tooltipmenu.ui \
+  qt/ultragate/forms/addresseswidget.ui \
+  qt/ultragate/forms/defaultdialog.ui \
+  qt/ultragate/settings/forms/settingsbackupwallet.ui \
+  qt/ultragate/settings/forms/settingsexportcsv.ui \
+  qt/ultragate/settings/forms/settingsbittoolwidget.ui \
+  qt/ultragate/settings/forms/settingsconsolewidget.ui \
+  qt/ultragate/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/ultragate/settings/forms/settingsfaqwidget.ui \
+  qt/ultragate/settings/forms/settingsinformationwidget.ui \
+  qt/ultragate/settings/forms/settingsmainoptionswidget.ui \
+  qt/ultragate/settings/forms/settingsmultisenddialog.ui \
+  qt/ultragate/settings/forms/settingsmultisendwidget.ui \
+  qt/ultragate/settings/forms/settingssignmessagewidgets.ui \
+  qt/ultragate/settings/forms/settingswalletoptionswidget.ui \
+  qt/ultragate/settings/forms/settingswalletrepairwidget.ui \
+  qt/ultragate/settings/forms/settingswidget.ui \
+  qt/ultragate/forms/welcomecontentwidget.ui \
+  qt/ultragate/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/ultragate/moc_ultragategui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/ultragate/moc_loadingdialog.cpp \
+  qt/ultragate/moc_pwidget.cpp \
+  qt/ultragate/moc_focuseddialog.cpp \
+  qt/ultragate/moc_snackbar.cpp \
+  qt/ultragate/moc_navmenuwidget.cpp \
+  qt/ultragate/moc_lockunlock.cpp \
+  qt/ultragate/moc_expandablebutton.cpp \
+  qt/ultragate/moc_furabstractlistitemdelegate.cpp \
+  qt/ultragate/moc_receivedialog.cpp \
+  qt/ultragate/moc_pfborderimage.cpp \
+  qt/ultragate/moc_topbar.cpp \
+  qt/ultragate/moc_txrow.cpp \
+  qt/ultragate/moc_dashboardwidget.cpp \
+  qt/ultragate/moc_addresslabelrow.cpp \
+  qt/ultragate/moc_contactdropdownrow.cpp \
+  qt/ultragate/moc_mninfodialog.cpp \
+  qt/ultragate/moc_optionbutton.cpp \
+  qt/ultragate/moc_mnmodel.cpp \
+  qt/ultragate/moc_masternodewizarddialog.cpp \
+  qt/ultragate/moc_mnrow.cpp \
+  qt/ultragate/moc_masternodeswidget.cpp \
+  qt/ultragate/moc_myaddressrow.cpp \
+  qt/ultragate/moc_contactsdropdown.cpp \
+  qt/ultragate/moc_sendchangeaddressdialog.cpp \
+  qt/ultragate/moc_sendconfirmdialog.cpp \
+  qt/ultragate/moc_sendcustomfeedialog.cpp \
+  qt/ultragate/moc_sendchangeaddressdialog.cpp \
+  qt/ultragate/moc_sendmultirow.cpp \
+  qt/ultragate/moc_send.cpp \
+  qt/ultragate/moc_addnewaddressdialog.cpp \
+  qt/ultragate/moc_addnewcontactdialog.cpp \
+  qt/ultragate/moc_requestdialog.cpp \
+  qt/ultragate/moc_receivewidget.cpp \
+  qt/ultragate/moc_tooltipmenu.cpp \
+  qt/ultragate/moc_addresseswidget.cpp \
+  qt/ultragate/moc_defaultdialog.cpp \
+  qt/ultragate/settings/moc_settingsbackupwallet.cpp \
+  qt/ultragate/settings/moc_settingsexportcsv.cpp \
+  qt/ultragate/settings/moc_settingsbittoolwidget.cpp \
+  qt/ultragate/settings/moc_settingsconsolewidget.cpp \
+  qt/ultragate/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/ultragate/settings/moc_settingsfaqwidget.cpp \
+  qt/ultragate/settings/moc_settingsinformationwidget.cpp \
+  qt/ultragate/settings/moc_settingsmainoptionswidget.cpp \
+  qt/ultragate/settings/moc_settingsmultisenddialog.cpp \
+  qt/ultragate/settings/moc_settingsmultisendwidget.cpp \
+  qt/ultragate/settings/moc_settingssignmessagewidgets.cpp \
+  qt/ultragate/settings/moc_settingswalletoptionswidget.cpp \
+  qt/ultragate/settings/moc_settingswalletrepairwidget.cpp \
+  qt/ultragate/settings/moc_settingswidget.cpp \
+  qt/ultragate/moc_welcomecontentwidget.cpp \
+  qt/ultragate/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/ultragate.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/ultragate/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_ultragate.cpp
+QT_QRC = qt/ultragate.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_ultragate_locale.cpp
+QT_QRC_LOCALE = qt/ultragate_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/ultragate/ultragategui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/trafficgraphwidget.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/ultragate/prunnable.h \
+  qt/ultragate/pfborderimage.h \
+  qt/ultragate/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/ultragate/pwidget.h \
+  qt/ultragate/focuseddialog.h \
+  qt/ultragate/guitransactionsutils.h \
+  qt/ultragate/snackbar.h \
+  qt/ultragate/navmenuwidget.h \
+  qt/ultragate/lockunlock.h \
+  qt/ultragate/receivedialog.h \
+  qt/ultragate/furlistrow.h \
+  qt/ultragate/furabstractlistitemdelegate.h \
+  qt/ultragate/txviewholder.h \
+  qt/ultragate/qtutils.h \
+  qt/ultragate/expandablebutton.h \
+  qt/ultragate/topbar.h \
+  qt/ultragate/txrow.h \
+  qt/ultragate/addressholder.h \
+  qt/ultragate/addressfilterproxymodel.h \
+  qt/ultragate/dashboardwidget.h \
+  qt/ultragate/addresslabelrow.h \
+  qt/ultragate/contactdropdownrow.h \
+  qt/ultragate/mninfodialog.h \
+  qt/ultragate/optionbutton.h \
+  qt/ultragate/mnmodel.h \
+  qt/ultragate/masternodewizarddialog.h \
+  qt/ultragate/mnrow.h \
+  qt/ultragate/masternodeswidget.h \
+  qt/ultragate/myaddressrow.h \
+  qt/ultragate/contactsdropdown.h \
+  qt/ultragate/sendchangeaddressdialog.h \
+  qt/ultragate/sendconfirmdialog.h \
+  qt/ultragate/sendcustomfeedialog.h \
+  qt/ultragate/sendchangeaddressdialog.h \
+  qt/ultragate/sendmultirow.h \
+  qt/ultragate/send.h \
+  qt/ultragate/addnewaddressdialog.h \
+  qt/ultragate/addnewcontactdialog.h \
+  qt/ultragate/requestdialog.h \
+  qt/ultragate/receivewidget.h \
+  qt/ultragate/tooltipmenu.h \
+  qt/ultragate/addresseswidget.h \
+  qt/ultragate/defaultdialog.h \
+  qt/ultragate/settings/settingsbackupwallet.h \
+  qt/ultragate/settings/settingsexportcsv.h \
+  qt/ultragate/settings/settingsbittoolwidget.h \
+  qt/ultragate/settings/settingsconsolewidget.h \
+  qt/ultragate/settings/settingsdisplayoptionswidget.h \
+  qt/ultragate/settings/settingsfaqwidget.h \
+  qt/ultragate/settings/settingsinformationwidget.h \
+  qt/ultragate/settings/settingsmainoptionswidget.h \
+  qt/ultragate/settings/settingsmultisenddialog.h \
+  qt/ultragate/settings/settingsmultisendwidget.h \
+  qt/ultragate/settings/settingssignmessagewidgets.h \
+  qt/ultragate/settings/settingswalletoptionswidget.h \
+  qt/ultragate/settings/settingswalletrepairwidget.h \
+  qt/ultragate/settings/settingswidget.h \
+  qt/ultragate/welcomecontentwidget.h \
+  qt/ultragate/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/ultragate/res/img/bg-dashboard-banner.png \
+  qt/ultragate/res/img/bg-multi-number-dark.svg \
+  qt/ultragate/res/img/ic-check-locked.svg \
+  qt/ultragate/res/img/ic-check-console.svg \
+  qt/ultragate/res/img/ic-nav-address.svg \
+  qt/ultragate/res/img/ic-update.svg \
+  qt/ultragate/res/img/bg-multi-number.svg \
+  qt/ultragate/res/img/ic-check-mint-off.svg \
+  qt/ultragate/res/img/ic-nav-dashboard-active.svg \
+  qt/ultragate/res/img/ic-wallet-status-locked.svg \
+  qt/ultragate/res/img/bg-splash.svg \
+  qt/ultragate/res/img/bg-splash.png \
+  qt/ultragate/res/img/ic-check-mint.svg \
+  qt/ultragate/res/img/ic-nav-dashboard-hover.svg \
+  qt/ultragate/res/img/ic-wallet-status-staking.svg \
+  qt/ultragate/res/img/ic-check-peers-off.svg \
+  qt/ultragate/res/img/ic-nav-dashboard.svg \
+  qt/ultragate/res/img/ic-wallet-status-unlocked.svg \
+  qt/ultragate/res/img/ic-check-peers.svg \
+  qt/ultragate/res/img/ic-nav-master-active.svg \
+  qt/ultragate/res/img/ic-watch-password-white.svg \
+  qt/ultragate/res/img/bg-welcome-container.jpg \
+  qt/ultragate/res/img/bg-welcome-container.png \
+  qt/ultragate/res/img/bg-welcome-container.svg \
+  qt/ultragate/res/img/bg-welcome-container@2x.png \
+  qt/ultragate/res/img/bg-welcome-container@3x.png \
+  qt/ultragate/res/img/ic-check-staking-off.svg \
+  qt/ultragate/res/img/ic-nav-master-hover.svg \
+  qt/ultragate/res/img/ic-watch-password.svg \
+  qt/ultragate/res/img/bg-welcome.jpg \
+  qt/ultragate/res/img/bg-welcome.svg \
+  qt/ultragate/res/img/bg-welcome@2x.jpg \
+  qt/ultragate/res/img/bg-welcome@3x.jpg \
+  qt/ultragate/res/img/bg-welcome.png \
+  qt/ultragate/res/img/ic-check-staking.svg \
+  qt/ultragate/res/img/ic-nav-master.svg \
+  qt/ultragate/res/img/img-dashboard-banner.jpg \
+  qt/ultragate/res/img/btn-radio-active.svg \
+  qt/ultragate/res/img/ic-check-mn-conf.svg \
+  qt/ultragate/res/img/ic-check-coin-conf.svg \
+  qt/ultragate/res/img/ic-check-sync-off.svg \
+  qt/ultragate/res/img/ic-nav-privacy-active.svg \
+  qt/ultragate/res/img/img-empty-contacts.svg \
+  qt/ultragate/res/img/btn-radio-off.svg \
+  qt/ultragate/res/img/ic-check-sync.png \
+  qt/ultragate/res/img/ic-nav-privacy-hover.svg \
+  qt/ultragate/res/img/img-empty-dark-contacts.svg \
+  qt/ultragate/res/img/ic-contact-arrow-down.svg \
+  qt/ultragate/res/img/ic-contact-arrow-down-white.svg \
+  qt/ultragate/res/img/ic-check-sync.svg \
+  qt/ultragate/res/img/ic-check-faq.svg \
+  qt/ultragate/res/img/ic-nav-privacy.svg \
+  qt/ultragate/res/img/img-empty-dark-error.svg \
+  qt/ultragate/res/img/ic-add-label.svg \
+  qt/ultragate/res/img/ic-pending.svg \
+  qt/ultragate/res/img/ic-check-theme-dark.svg \
+  qt/ultragate/res/img/ic-nav-receive-active.svg \
+  qt/ultragate/res/img/img-empty-dark-masternode.svg \
+  qt/ultragate/res/img/ic-add-liliac.svg \
+  qt/ultragate/res/img/ic-check-theme-light.svg \
+  qt/ultragate/res/img/ic-nav-receive-hover.svg \
+  qt/ultragate/res/img/img-empty-dark-multisend.svg \
+  qt/ultragate/res/img/ic-add-purple.svg \
+  qt/ultragate/res/img/ic-check-white.svg \
+  qt/ultragate/res/img/ic-nav-receive.svg \
+  qt/ultragate/res/img/img-empty-dark-peers.svg \
+  qt/ultragate/res/img/ic-add.svg \
+  qt/ultragate/res/img/ic-check.svg \
+  qt/ultragate/res/img/ic-nav-send-active.svg \
+  qt/ultragate/res/img/img-empty-dark-staking-off.svg \
+  qt/ultragate/res/img/img-empty-dark-staking-on.svg \
+  qt/ultragate/res/img/ic-address-book-grey.svg \
+  qt/ultragate/res/img/ic-chevron-left.svg \
+  qt/ultragate/res/img/ic-nav-send-hover.svg \
+  qt/ultragate/res/img/img-empty-dark-transactions.svg \
+  qt/ultragate/res/img/ic-address-book-white.svg \
+  qt/ultragate/res/img/ic-chevron-right.svg \
+  qt/ultragate/res/img/ic-nav-send.svg \
+  qt/ultragate/res/img/img-empty-error.svg \
+  qt/ultragate/res/img/ic-address-book.svg \
+  qt/ultragate/res/img/ic-clear-liliac.svg \
+  qt/ultragate/res/img/ic-nav-settings-active.svg \
+  qt/ultragate/res/img/img-empty-masternode.svg \
+  qt/ultragate/res/img/ic-address-send-white.svg \
+  qt/ultragate/res/img/ic-clear-purple.svg \
+  qt/ultragate/res/img/ic-nav-settings-hover.svg \
+  qt/ultragate/res/img/img-empty-multisend.svg \
+  qt/ultragate/res/img/ic-address-send.svg \
+  qt/ultragate/res/img/ic-close-white.svg \
+  qt/ultragate/res/img/ic-nav-settings.svg \
+  qt/ultragate/res/img/img-empty-peers.svg \
+  qt/ultragate/res/img/img-empty-privacy.svg \
+  qt/ultragate/res/img/img-empty-privacy-dark.svg \
+  qt/ultragate/res/img/ic-arrow-drop-down-white.svg \
+  qt/ultragate/res/img/ic-close.svg \
+  qt/ultragate/res/img/ic-radio-liliac-on.svg \
+  qt/ultragate/res/img/img-empty-staking-off.svg \
+  qt/ultragate/res/img/ic-arrow-drop-down.svg \
+  qt/ultragate/res/img/ic-coin-ulg.svg \
+  qt/ultragate/res/img/ic-receive-off.svg \
+  qt/ultragate/res/img/img-empty-staking-on.svg \
+  qt/ultragate/res/img/ic-arrow-drop-up-white.svg \
+  qt/ultragate/res/img/ic-coin-zulg.png \
+  qt/ultragate/res/img/ic-receive-on.svg \
+  qt/ultragate/res/img/img-empty-transactions.svg \
+  qt/ultragate/res/img/ic-arrow-drop-up.svg \
+  qt/ultragate/res/img/ic-coin-zulg.svg \
+  qt/ultragate/res/img/ic-received.svg \
+  qt/ultragate/res/img/img-logo-ultragate.png \
+  qt/ultragate/res/img/ic-arrow-drop-white-down.svg \
+  qt/ultragate/res/img/ic-combo-box.svg \
+  qt/ultragate/res/img/ic-send.svg \
+  qt/ultragate/res/img/ic-arrow-purple-down.svg \
+  qt/ultragate/res/img/ic-submenu-lock.svg \
+  qt/ultragate/res/img/ic-arrow-right-white.svg \
+  qt/ultragate/res/img/ic-arrow-left-white.svg \
+  qt/ultragate/res/img/ic-arrow-left.svg \
+  qt/ultragate/res/img/ic-copy-liliac.svg \
+  qt/ultragate/res/img/ic-submenu-staking.svg \
+  qt/ultragate/res/img/ic-arrow-right.svg \
+  qt/ultragate/res/img/ic-copy.svg \
+  qt/ultragate/res/img/ic-copy-big.svg \
+  qt/ultragate/res/img/ic-copy-big-white.svg \
+  qt/ultragate/res/img/ic-submenu-unlock.svg \
+  qt/ultragate/res/img/ic-arrow-white-left.svg \
+  qt/ultragate/res/img/ic-exit.svg \
+  qt/ultragate/res/img/ic-switch-liliac-on.svg \
+  qt/ultragate/res/img/img-nav-logo.svg \
+  qt/ultragate/res/img/ic-arrow-white-right.svg \
+  qt/ultragate/res/img/ic-expand.svg \
+  qt/ultragate/res/img/ic-switch-off.svg \
+  qt/ultragate/res/img/img-qr-test-big.png \
+  qt/ultragate/res/img/ic-check-active.svg \
+  qt/ultragate/res/img/ic-folder.svg \
+  qt/ultragate/res/img/ic-switch-on.svg \
+  qt/ultragate/res/img/img-qr-test.png \
+  qt/ultragate/res/img/ic-check-box.svg \
+  qt/ultragate/res/img/ic-check-box-dark-active.svg \
+  qt/ultragate/res/img/ic-check-box-indeterminate.svg \
+  qt/ultragate/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/ultragate/res/img/ic-label-liliac.svg \
+  qt/ultragate/res/img/ic-transaction-warning.svg \
+  qt/ultragate/res/img/ic-transaction-mint.svg \
+  qt/ultragate/res/img/ic-transaction-mint-inactive.svg \
+  qt/ultragate/res/img/img-qr.svg \
+  qt/ultragate/res/img/ic-check-connect-off.svg \
+  qt/ultragate/res/img/ic-check-tor-off.svg \
+  qt/ultragate/res/img/ic-check-tor.svg \
+  qt/ultragate/res/img/ic-label.svg \
+  qt/ultragate/res/img/ic-transaction-received.svg \
+  qt/ultragate/res/img/dark/ic-transaction-received.svg \
+  qt/ultragate/res/img/dark/ic-transaction-warning.svg \
+  qt/ultragate/res/img/dark/ic-transaction-mint.svg \
+  qt/ultragate/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/ultragate/res/img/ic-transaction-received-inactive.svg \
+  qt/ultragate/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/ultragate/res/img/img-welcome-step1.png \
+  qt/ultragate/res/img/ic-check-connect.svg \
+  qt/ultragate/res/img/ic-menu-hover.svg \
+  qt/ultragate/res/img/ic-transaction-sent.svg \
+  qt/ultragate/res/img/ic-transaction-sent-inactive.svg \
+  qt/ultragate/res/img/dark/ic-transaction-sent.svg \
+  qt/ultragate/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/ultragate/res/img/img-welcome-step2.png \
+  qt/ultragate/res/img/ic-check-dark.svg \
+  qt/ultragate/res/img/ic-mint.svg \
+  qt/ultragate/res/img/ic-transaction-staked.svg \
+  qt/ultragate/res/img/ic-transaction-staked-inactive.svg \
+  qt/ultragate/res/img/dark/ic-transaction-staked.svg \
+  qt/ultragate/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/ultragate/res/img/img-welcome-step3.png \
+  qt/ultragate/res/img/ic-check-liliac-on.svg \
+  qt/ultragate/res/img/ic-nav-address-active.svg \
+  qt/ultragate/res/img/ic-unlock-staking.svg \
+  qt/ultragate/res/img/img-welcome-step4.png \
+  qt/ultragate/res/img/ic-check-locked-off.svg \
+  qt/ultragate/res/img/ic-nav-address-hover.svg \
+  qt/ultragate/res/img/ic-update-liliac.svg \
+  qt/ultragate/res/img/ic-arrow-drop-down-purple.svg \
+  qt/ultragate/res/img/ic-arrow-drop-up-purple.svg \
+  qt/ultragate/res/img/ic-check-liliac-indeterminate.svg \
+  qt/ultragate/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/ultragate/res/img/ic-check-box-indeterminate.svg \
+  qt/ultragate/res/img/ani-loading-dark.gif \
+  qt/ultragate/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/ultragate/ultragategui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/ultragate/loadingdialog.cpp \
+  qt/ultragate/pwidget.cpp \
+  qt/ultragate/focuseddialog.cpp \
+  qt/ultragate/guitransactionsutils.cpp \
+  qt/ultragate/snackbar.cpp \
+  qt/ultragate/navmenuwidget.cpp \
+  qt/ultragate/lockunlock.cpp \
+  qt/ultragate/receivedialog.cpp \
+  qt/ultragate/furabstractlistitemdelegate.cpp \
+  qt/ultragate/txviewholder.cpp \
+  qt/ultragate/qtutils.cpp \
+  qt/ultragate/expandablebutton.cpp \
+  qt/ultragate/topbar.cpp \
+  qt/ultragate/txrow.cpp \
+  qt/ultragate/addressholder.cpp \
+  qt/ultragate/addressfilterproxymodel.cpp \
+  qt/ultragate/dashboardwidget.cpp \
+  qt/ultragate/addresslabelrow.cpp \
+  qt/ultragate/contactdropdownrow.cpp \
+  qt/ultragate/contactsdropdown.cpp \
+  qt/ultragate/optionbutton.cpp \
+  qt/ultragate/mninfodialog.cpp \
+  qt/ultragate/mnmodel.cpp \
+  qt/ultragate/masternodewizarddialog.cpp \
+  qt/ultragate/mnrow.cpp \
+  qt/ultragate/masternodeswidget.cpp \
+  qt/ultragate/myaddressrow.cpp \
+  qt/ultragate/sendchangeaddressdialog.cpp \
+  qt/ultragate/sendconfirmdialog.cpp \
+  qt/ultragate/sendcustomfeedialog.cpp \
+  qt/ultragate/sendchangeaddressdialog.cpp \
+  qt/ultragate/sendmultirow.cpp \
+  qt/ultragate/send.cpp \
+  qt/ultragate/addnewaddressdialog.cpp \
+  qt/ultragate/addnewcontactdialog.cpp \
+  qt/ultragate/requestdialog.cpp \
+  qt/ultragate/receivewidget.cpp \
+  qt/ultragate/tooltipmenu.cpp \
+  qt/ultragate/addresseswidget.cpp \
+  qt/ultragate/defaultdialog.cpp \
+  qt/ultragate/settings/settingsbackupwallet.cpp \
+  qt/ultragate/settings/settingsexportcsv.cpp \
+  qt/ultragate/settings/settingsbittoolwidget.cpp \
+  qt/ultragate/settings/settingsconsolewidget.cpp \
+  qt/ultragate/settings/settingsdisplayoptionswidget.cpp \
+  qt/ultragate/settings/settingsfaqwidget.cpp \
+  qt/ultragate/settings/settingsinformationwidget.cpp \
+  qt/ultragate/settings/settingsmainoptionswidget.cpp \
+  qt/ultragate/settings/settingsmultisenddialog.cpp \
+  qt/ultragate/settings/settingsmultisendwidget.cpp \
+  qt/ultragate/settings/settingssignmessagewidgets.cpp \
+  qt/ultragate/settings/settingswalletoptionswidget.cpp \
+  qt/ultragate/settings/settingswalletrepairwidget.cpp \
+  qt/ultragate/settings/settingswidget.cpp \
+  qt/ultragate/welcomecontentwidget.cpp \
+  qt/ultragate/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/ultragate/res/css/style_dark.css \
+  qt/ultragate/res/css/style_light.css
+
+BITCOIN_RC = qt/res/ultragate-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_ultragate_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# ultragate-qt binary #
+qt_ultragate_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_ultragate_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_ultragate_qt_SOURCES = qt/ultragate.cpp
+if TARGET_DARWIN
+  qt_ultragate_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_ultragate_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_ultragate_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_ultragate_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_ultragate_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_ultragate_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_ultragate_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_ultragate_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/ultragatestrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/ultragatestrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/ultragate.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/ultragate_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name ultragate_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name ultragate $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_ultragate_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+ultragate_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_ultragate_qt_OBJECTS) qt/ultragate-qt$(EXEEXT) $(LIBBITCOINQT)
+
+ultragate_qt : qt/ultragate-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

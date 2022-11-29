@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[ultragate-project-translations.qt-translation-42x]
+file_filter = src/qt/locale/ultragate_<lang>.ts
+source_file = src/qt/locale/ultragate_en.ts
+source_lang = en
