@@ -199,13 +199,13 @@ public:
         nDefaultPort = 32552;
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-        vSeeds.push_back(CDNSSeedData("dnsseed", "dnsseed.ultragate.online", true)); // DNS seed
-        vSeeds.push_back(CDNSSeedData("seed1", "seed1.ultragate.online", true)); // Single node address
-        vSeeds.push_back(CDNSSeedData("seed2", "seed2.ultragate.online", true)); // Single node address
-        vSeeds.push_back(CDNSSeedData("seed3", "seed3.ultragate.online", true)); // Single node address
-        vSeeds.push_back(CDNSSeedData("seed4", "seed4.ultragate.online", true)); // Single node address
-        vSeeds.push_back(CDNSSeedData("seed5", "seed5.ultragate.online", true)); // Single node address
-        vSeeds.push_back(CDNSSeedData("seed6", "seed6.ultragate.online", true)); // Single node address
+        vSeeds.push_back(CDNSSeedData("dnsseed", "dnsseed.ultragate.space", true)); // DNS seed
+        vSeeds.push_back(CDNSSeedData("seed1", "seed1.ultragate.space", true)); // Single node address
+        vSeeds.push_back(CDNSSeedData("seed2", "seed2.ultragate.space", true)); // Single node address
+        vSeeds.push_back(CDNSSeedData("seed3", "seed3.ultragate.space", true)); // Single node address
+        vSeeds.push_back(CDNSSeedData("seed4", "seed4.ultragate.space", true)); // Single node address
+        vSeeds.push_back(CDNSSeedData("seed5", "seed5.ultragate.space", true)); // Single node address
+        vSeeds.push_back(CDNSSeedData("seed6", "seed6.ultragate.space", true)); // Single node address
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 38);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 98);

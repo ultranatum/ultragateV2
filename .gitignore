@@ -140,3 +140,4 @@ ui_*
 build*
 # ultragated.*
 ultragated-new-gui.*
+.vscode/settings.json
